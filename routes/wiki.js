@@ -25,4 +25,13 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.get('/:slug', async (req, res) => {
+  const slug = req.params.slug;
+  const pageData = await Page.findOne({
+    where: {slug: slug}
+  });
+  res.json(pageData)
+  // console.log(res.json(pageData))
+})
+
 module.exports = router;
