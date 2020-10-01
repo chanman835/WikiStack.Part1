@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon /Users/winsonchan/Documents/immersiveFullStack/juniorPhase/pairExercises/w2/WikiStack.Part1/app.js"
+    "start": "nodemon /Users/danberadi/Fullstack/wikistack/app.js"
   },
   "author": "",
   "license": "ISC",

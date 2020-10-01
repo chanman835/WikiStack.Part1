@@ -18,7 +18,7 @@ const User = db.define('user', {
 });
 
 const Page = db.define('page', {
-  title:  {
+  title: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -35,9 +35,26 @@ const Page = db.define('page', {
 
   status: {
     type: Sequelize.ENUM('open', 'closed'),
-    defaultValue: 'open',
+    defaultValue: 'open'
   }
 
+})
+
+function makeSlug (title) {
+  return title.split(' ')
+    .map((word) => {
+      const letters = word.split('');
+      const newWord = letters.filter((char) => {
+        const use = 'abcdefghijklmnopqrstuvwxyz1234567890'
+        return use.indexOf(char.toLowerCase()) !== -1;
+      })
+      return newWord.join('');
+    })
+    .join('_');
+}
+
+Page.beforeValidate((pageInstance) => {
+  pageInstance.slug = makeSlug(pageInstance.title)
 })
 
 module.exports = {
