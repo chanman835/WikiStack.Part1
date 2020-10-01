@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const path = require('path');
-const { db } = require ('./models');
+const { db, Page, User } = require ('./models');
 const { addPage, editPage, main, userList, userPages, wikiPage } = require('./views/index')
 
 app.use(morgan('dev'));
@@ -22,6 +22,15 @@ app.get('/', (req, res) => {
 
 const PORT = 3000;
 
-app.listen(PORT, () => {
-    console.log(`App listening in port ${PORT}`)
-});
+const syncDatabase = async () => {
+  await db.sync({force: true});
+
+  app.listen(PORT, () => {
+      console.log(`App listening in port ${PORT}`)
+  });
+}
+
+
+syncDatabase()
+
+
