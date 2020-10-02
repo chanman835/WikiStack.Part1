@@ -2,8 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const path = require('path');
-const { db, Page, User } = require ('./models');
-const { addPage, editPage, main, userList, userPages, wikiPage } = require('./views/index')
+const { db } = require ('./models');
 const wikiRouter = require('./routes/wiki');
 const userRouter = require('./routes/users')
 
