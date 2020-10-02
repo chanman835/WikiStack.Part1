@@ -40,17 +40,20 @@ const Page = db.define('page', {
 
 })
 
+Page.belongsTo(User, { as: 'author' });
+
+
 function makeSlug (title) {
   return title.split(' ')
-    .map((word) => {
-      const letters = word.split('');
-      const newWord = letters.filter((char) => {
-        const use = 'abcdefghijklmnopqrstuvwxyz1234567890'
-        return use.indexOf(char.toLowerCase()) !== -1;
-      })
-      return newWord.join('');
+  .map((word) => {
+    const letters = word.split('');
+    const newWord = letters.filter((char) => {
+      const use = 'abcdefghijklmnopqrstuvwxyz1234567890'
+      return use.indexOf(char.toLowerCase()) !== -1;
     })
-    .join('_');
+    return newWord.join('');
+  })
+  .join('_');
 }
 
 Page.beforeValidate((pageInstance) => {
